@@ -1,9 +1,38 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Countries List</PageTitle>
 
-<h1>Hello, world!</h1>
+<UseGetContinents Context="result">
+    <ChildContent>
 
-Welcome to your new app.
+        <!-- Take first continent and set it as selectedContinent -->
+        @if (result.Continents != null && _selectedContinent == null)
+        {
+            _selectedContinent = result.Continents.First()!.Code;
+        }
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+        <select @onchange="SelectContinent">
+            @foreach (var continent in result.Continents!)
+            {
+                <option value="@continent!.Code">@continent.Name</option>
+            }
+        </select>
+    </ChildContent>
+    <ErrorContent>
+        Something went wrong ...<br/>
+        @result.First().Message
+    </ErrorContent>
+    <LoadingContent>
+        <p>Loading continents...</p>
+    </LoadingContent>
+</UseGetContinents>
+
+@functions
+{
+    private string? _selectedContinent;
+
+    private async Task SelectContinent(ChangeEventArgs args)
+    {
+        await Task.Run(() => _selectedContinent = args.Value?.ToString());
+    }
+}
