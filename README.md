@@ -5,6 +5,7 @@
 
 ## How to use the app
 
+* Pull the project from the repository (using `git clone`)
 * Open the app in your browser at the address visible in the console
 * Select continent name from the dropdown list
 * Select number of random countries to be displayed (2-10)
