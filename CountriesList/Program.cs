@@ -10,6 +10,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services
 .AddContinentsClient()
-.ConfigureHttpClient(client => client.BaseAddress = new Uri("https://countries.trevorblades.com/"));
+.ConfigureHttpClient(client => client.BaseAddress = new Uri("https://countries.trevorblades.com/graphql"))
+.ConfigureWebSocketClient(client => client.Uri = new Uri("wss://countries.trevorblades.com/graphql"));
 
 await builder.Build().RunAsync();

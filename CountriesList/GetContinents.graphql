@@ -2,5 +2,9 @@ query GetContinents {
     continents {
         name
         code
+        countries {
+            name
+            code
+        }
     }
 }
